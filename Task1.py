@@ -1,3 +1,5 @@
+from collections import Counter
+import string
 text = """Python is a versatile, high-level programming language loved by developers worldwide.
 Why do so many programmers start with Python?
 Because Python prioritizes readability, simplicity, and clear syntax!
@@ -8,70 +10,59 @@ So keep writing Python, keep building projects, and keep solving real problems.
 Remember: Great programmers are not born; they are made through daily practice with real code!"""
 
 #removing white spaces and split the text to count number of words
-list_of_words = text.strip().lower()
-new_text = list_of_words.replace(",", "").replace("?", "").replace(".", "").replace("-", "").replace("!", "").replace(":", "")
-list_of_new_text = new_text.split()
-num_of_words = len(list_of_new_text)
+words = []
+for to_be_stripped in text.lower().split():
+    word = to_be_stripped.strip(string.punctuation)
+    if word:
+        words.append(word)
+num_of_words = len(words)
 print(f"Number of words in the text is : {num_of_words}")
+new_text = " ".join(words)
+text_count_spaces = list(new_text)
 
 #creating a list to insert the characters and count them
-characters = list(list_of_words)
+characters = list(new_text)
 characters_with_spaces = len(characters)
 print(f"Number of characters in the text including white spaces is : {characters_with_spaces}")
 
 #removing white spaces
-removed_spaces = list_of_words.replace(" ", "").replace("\n","" )
+removed_spaces = new_text.replace(" ", "")
 new_list = list(removed_spaces)
 num_of_characters = len(new_list)
 print(f"Number of characters in the text without whitespaces is : {num_of_characters}")
 
-#counting number of sentences through counting "\n" in characters list
-num_of_lines = characters.count("\n")+1
+#counting number of lines through counting "\n" in characters list
+lines = text.split("\n")
+num_of_lines = len(lines)
 print(f"number of lines of the text is : {num_of_lines}")
 
 #counting sentence numbers through counting special characters for ending sentences.
+sentence_text = list(text.lower().strip())
 sentenece_count = 0
-for i in characters:
+for i in sentence_text:
     if i=="." or i=="!" or i=="?":
         sentenece_count+=1
 print(f"Number of sentences in the text is : {sentenece_count}")
 
 #The Dictionary including words and their repetition
 character_dict = {}
-repetition_dict = {}
-for i in list_of_new_text:
-    if i in repetition_dict:
-        repetition_dict[i] += 1
-    else:
-        repetition_dict[i]= 1
+counter = Counter(words)
+common_words = counter.most_common()
+print("Most common words are: ")
+print(common_words[0:5])
 
 #The Dictionary including words and their lengths
-for i in list_of_new_text:
+for i in words:
     character_dict[i]=len(i)
+
 #calculating the average of words' lengths
 word_length = list(character_dict.values())
 sum_of_values = 0
 for i in word_length:
     sum_of_values += i
-average_legth = round(sum_of_values/len(word_length))
+average_legth = (sum_of_values/len(word_length))
 print(f"averag of length of the words in the text is {average_legth}")
 
-#finding 5 most common words in the text
-#extracting repetitionDict values to sorting and finding 5 last elements of the list
-word_ferequency = list(repetition_dict.values())
-sorted_word_ferequency = sorted(word_ferequency)
-most_common_words_values = sorted_word_ferequency[-5:]
-
-common_words = []
-items = list(repetition_dict.values())
-new_items = sorted(items, reverse=True)
-common_values = new_items[:5]
-common_words_dict = {}
-for k, v in repetition_dict.items():
-    if v in common_values:
-        common_words_dict[k] = v
-print("Top 5 most common words are : ")
-print(common_words_dict)
 
     
         
