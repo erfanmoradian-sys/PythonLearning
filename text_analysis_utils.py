@@ -46,21 +46,55 @@ def normalize_words(raw_text):
 
 # --- text counter ---
 def analyze(raw_text, cleaned_text):
+    num_of_words = word_counter(cleaned_text)
+    char_with_space = char_cuonter(raw_text)
+    num_characters_without_space = no_space_char_counter(raw_text)
+    num_of_lines = line_counter(raw_text)
+    sentenece_count = sentence_counter(raw_text)
+    five_words = five_common_words(cleaned_text)
+    word_length_average = word_average(cleaned_text)
+    return {"words": num_of_words, "characters with spaces": char_with_space,
+             "characters withot spaces" : num_characters_without_space,
+             "lines": num_of_lines,
+              "sentences": sentenece_count,
+               "5 common words": five_words,
+                "average length": word_length_average }
+
+def word_counter(cleaned_text):
     num_of_words = len(cleaned_text)
+    return num_of_words
+
+def char_cuonter(raw_text):
     char_with_space = len(raw_text)
+    return char_with_space
+
+def no_space_char_counter(raw_text):
     removed_spaces = raw_text.replace(" ", "")
     num_characters_without_space = len(removed_spaces)
+    return num_characters_without_space
+
+def line_counter(raw_text):
     lines = raw_text.splitlines()
     num_of_lines = len(lines)
+    return num_of_lines
+
+def sentence_counter(raw_text):
     sentenece_count = 0
     for i in raw_text:
         if i=="." or i=="!" or i=="?":
             sentenece_count+=1
-    words = list(cleaned_text)
+    return sentenece_count
+
+def five_common_words(cleaned_text):
     character_dict = {}
     counter = Counter(cleaned_text)
     common_words = counter.most_common()
     five_common_words = common_words[0:5]
+    return five_common_words
+
+def word_average(cleaned_text):
+    character_dict = {}
+    words = list(cleaned_text)
     for i in words:
         character_dict[i]=len(i)
     word_length = list(character_dict.values())
@@ -71,11 +105,4 @@ def analyze(raw_text, cleaned_text):
         average_legth = round(sum_of_values/len(word_length), 2)
     except ZeroDivisionError:
         print("There is no text to analyze")
-    return {"words" : num_of_words,
-             "characters with spaces": char_with_space,
-             "characters withot spaces": num_characters_without_space,
-               "lines": num_of_lines,
-                 "sentences": sentenece_count,
-                  "5 common words": five_common_words,
-                  "average length": average_legth
-                        }
+    return average_legth

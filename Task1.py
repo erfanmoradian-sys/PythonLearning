@@ -9,7 +9,7 @@ def main():
     result = analyze(text, clean_text)
     print(f"The text contains {result['words']} words")
     print(f"{result['characters with spaces']} characters with spaces")
-    print(f"{result['characters withot spaces']} characters withot spaces")
+    print(f"{result['characters withot spaces']} characters without spaces")
     print(f"{result['lines']} lines")
     print(f"{result['sentences']} sentences")
     print(f" five common words are {result['5 common words']}")
