@@ -44,22 +44,6 @@ def normalize_words(raw_text):
     cleaned_text = words
     return cleaned_text
 
-# --- text counter ---
-def analyze(raw_text, cleaned_text):
-    num_of_words = word_counter(cleaned_text)
-    char_with_space = char_cuonter(raw_text)
-    num_characters_without_space = no_space_char_counter(raw_text)
-    num_of_lines = line_counter(raw_text)
-    sentenece_count = sentence_counter(raw_text)
-    five_words = five_common_words(cleaned_text)
-    word_length_average = word_average(cleaned_text)
-    return {"words": num_of_words, "characters with spaces": char_with_space,
-             "characters withot spaces" : num_characters_without_space,
-             "lines": num_of_lines,
-              "sentences": sentenece_count,
-               "5 common words": five_words,
-                "average length": word_length_average }
-
 def word_counter(cleaned_text):
     num_of_words = len(cleaned_text)
     return num_of_words
@@ -101,8 +85,38 @@ def word_average(cleaned_text):
     sum_of_values = 0
     for i in word_length:
         sum_of_values += i
+    average_length = 0
     try:
-        average_legth = round(sum_of_values/len(word_length), 2)
+        average_length = round(sum_of_values/len(word_length), 2)
     except ZeroDivisionError:
         print("There is no text to analyze")
-    return average_legth
+    return average_length
+
+# --- text counter ---
+def analyze(raw_text, cleaned_text):
+    num_of_words = word_counter(cleaned_text)
+    char_with_space = char_cuonter(raw_text)
+    num_characters_without_space = no_space_char_counter(raw_text)
+    num_of_lines = line_counter(raw_text)
+    sentenece_count = sentence_counter(raw_text)
+    five_words = five_common_words(cleaned_text)
+    word_length_average = word_average(cleaned_text)
+    return {"words": num_of_words, "characters_with_spaces": char_with_space,
+             "characters_without_spaces" : num_characters_without_space,
+             "lines": num_of_lines,
+              "sentences": sentenece_count,
+               "five_common_words": five_words,
+                "average_length": word_length_average }
+
+
+
+
+
+
+
+
+
+
+
+
+
