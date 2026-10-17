@@ -1,0 +1,59 @@
+html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Results</title>
+</head>
+<body>
+
+    <h1>Text Analysis Results</h1>
+
+    <table border="1" cellpadding="8">
+        <thead>
+            <tr>
+                <th>Metric</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>Word Count</td>
+                <td>{{ result['words'] }}</td>
+            </tr>
+            <tr>
+                <td>Characters including spaces</td>
+                <td>{{ result['characters_with_spaces'] }}</td>
+            </tr>
+            <tr>
+                <td>Characters without spaces</td>
+                <td>{{ result['characters_without_spaces'] }}</td>
+            </tr>
+            <tr>
+                <td>Number of lines </td>
+                <td>{{ result['lines'] }}</td>
+            </tr>
+            <tr>
+                <td>Number of sentences </td>
+                <td>{{ result['sentences'] }}</td>
+            </tr>
+            <tr>
+                <td>Five common words are: </td>
+                <td>{{ result['five_common_words'] }}</td>
+            </tr>
+            <tr>
+                <td>The average word length is: </td>
+                <td>{{ result['average_length'] }}</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    <br>
+
+    <a href="/">Back to Home</a>
+
+</body>
+</html>

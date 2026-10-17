@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis History</title>
+</head>
+<body>
+
+    <h1>Analysis History</h1>
+    <p>Here you can see your previously analyzed texts.</p>
+
+    {% if analysis %}
+        <table border="1" cellpadding="10">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Text Preview</th>
+                    <th>Date Entered</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for i in analysis %}
+                    <tr>
+                        <td>{{ i.id }}</td>
+                        <td>{{ i.text }}</td>
+                        <td>{{ i.date_entered }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No analysis history found.</p>
+    {% endif %}
+
+    <br>
+    <a href="/">Back to Home</a>
+
+</body>
+</html>

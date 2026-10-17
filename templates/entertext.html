@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Text</title>
+</head>
+<body>
+
+    <h1>Enter Text</h1>
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
+
+    <form action="/entertext" method="POST">
+        <label for="raw_text">Paste your text here:</label>
+        <br><br>
+
+        <textarea
+            id="raw_text"
+            name="raw_text"
+            rows="12"
+            cols="60"
+            placeholder="Type or paste your text here..."
+            required
+        ></textarea>
+
+        <br><br>
+
+        <button type="submit">Analyze</button>
+    </form>
+
+    <br>
+    <a href="/">Back to Home</a>
+
+</body>
+</html>
