@@ -11,30 +11,99 @@
     <p>Here you can see your previously analyzed texts.</p>
 
     {% if analysis %}
-        <table border="1" cellpadding="10">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Text Preview</th>
-                    <th>Date Entered</th>
-                </tr>
-            </thead>
+        {% for i in analysis %}
 
-            <tbody>
-                {% for i in analysis %}
+            <h2>Analysis ID: {{ i.id }}</h2>
+
+            <h3>Analysis Information</h3>
+
+            <table border="1" cellpadding="8">
+                <tbody>
                     <tr>
+                        <th>Analysis ID</th>
                         <td>{{ i.id }}</td>
-                        <td>{{ i.text }}</td>
+                    </tr>
+
+                    <tr>
+                        <th>Original Text</th>
+                        <td>
+                            {{ i.text[:100] }}
+                            {% if i.text|length > 100 %}
+                                ...
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Time Entered</th>
                         <td>{{ i.date_entered }}</td>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+
+            <h3>Analysis Metrics</h3>
+
+            <table border="1" cellpadding="8">
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>Word Count</td>
+                        <td>{{ i.words }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>Characters including spaces</td>
+                        <td>{{ i.num_of_char_and_space }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>Characters without spaces</td>
+                        <td>{{ i.num_of_char }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>Number of lines</td>
+                        <td>{{ i.num_of_lines }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>Number of sentences</td>
+                        <td>{{ i.num_of_sentence }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>Five common words</td>
+                        <td>
+                            {% for i, j in i.five_common_words %}
+                                {{ i }} ({{ j }})<br>
+                            {% endfor %}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Average word length</td>
+                        <td>{{ i.average_length }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <br>
+            <hr>
+            <br>
+
+        {% endfor %}
+
     {% else %}
         <p>No analysis history found.</p>
     {% endif %}
 
     <br>
+
     <a href="/">Back to Home</a>
 
 </body>

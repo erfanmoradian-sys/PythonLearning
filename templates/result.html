@@ -1,14 +1,37 @@
-html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analysis Results</title>
+    <title>Analysis analysiss</title>
 </head>
 <body>
 
     <h1>Text Analysis Results</h1>
+
+    <h2>Analysis Information</h2>
+
+    <table border="1" cellpadding="8">
+        <tbody>
+            <tr>
+                <th>Analysis ID</th>
+                <td>{{ analysis.id }}</td>
+            </tr>
+
+            <tr>
+                <th>Original Text</th>
+                <td>{{ analysis.text }}</td>
+            </tr>
+
+            <tr>
+                <th>Date Entered</th>
+                <td>{{ analysis.date_entered }}</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <h2>Analysis Metrics</h2>
 
     <table border="1" cellpadding="8">
         <thead>
@@ -21,33 +44,42 @@ html
         <tbody>
             <tr>
                 <td>Word Count</td>
-                <td>{{ result['words'] }}</td>
+                <td>{{ analysis.words }}</td>
             </tr>
+
             <tr>
                 <td>Characters including spaces</td>
-                <td>{{ result['characters_with_spaces'] }}</td>
+                <td>{{ analysis.num_of_char_and_space }}</td>
             </tr>
+
             <tr>
                 <td>Characters without spaces</td>
-                <td>{{ result['characters_without_spaces'] }}</td>
+                <td>{{ analysis.num_of_char }}</td>
             </tr>
+
             <tr>
-                <td>Number of lines </td>
-                <td>{{ result['lines'] }}</td>
+                <td>Number of lines</td>
+                <td>{{ analysis.num_of_lines }}</td>
             </tr>
+
             <tr>
-                <td>Number of sentences </td>
-                <td>{{ result['sentences'] }}</td>
+                <td>Number of sentences</td>
+                <td>{{ analysis.num_of_sentence }}</td>
             </tr>
+
             <tr>
-                <td>Five common words are: </td>
-                <td>{{ result['five_common_words'] }}</td>
+                <td>Five common words</td>
+                <td>
+                    {% for i, j in analysis.five_common_words %}
+                        {{ i}} ({{ j }})<br>
+                    {% endfor %}
+                </td>
             </tr>
+
             <tr>
-                <td>The average word length is: </td>
-                <td>{{ result['average_length'] }}</td>
+                <td>Average word length</td>
+                <td>{{ analysis.average_length }}</td>
             </tr>
-            
         </tbody>
     </table>
 
