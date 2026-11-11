@@ -1,6 +1,7 @@
 from datetime import datetime
-from sqlalchemy import Column, Integer, Text, DateTime, Float, JSON, create_engine
+from sqlalchemy import Column, Integer, String, Text, DateTime, Float, JSON, create_engine, ForeignKey
 from sqlalchemy.orm import declarative_base,Mapped, mapped_column, sessionmaker
+from flask_login import UserMixin
 
 Base = declarative_base()
 
@@ -19,7 +20,15 @@ class Analysis(Base):
     num_of_sentence: Mapped[int] = mapped_column(Integer, nullable=False)
     five_common_words: Mapped[list] = mapped_column(JSON)
     average_length: Mapped[Float] = mapped_column(Float)
+    user_id: Mapped[int] = mapped_column(ForeignKey("user.id"), nullable = True)
 
+class User(Base, UserMixin):
+    __tablename__ = "user"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, nullable = False)
+    username: Mapped[str] = mapped_column(String(50), unique=True, nullable = False )
+    email: Mapped[str] = mapped_column(String(255), unique=True, nullable = False)
+    password: Mapped[str] = mapped_column(String(255), nullable = False)
+    
 
 Base.metadata.create_all(engine)
 
